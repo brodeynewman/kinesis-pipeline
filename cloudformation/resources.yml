@@ -75,4 +75,4 @@ Outputs:
     Value: !GetAtt KinesisStreamDefault.Arn
 
   EventTableName:
-    Value: !Ref EventTable.TableName
+    Value: !GetAtt EventTable.TableName
