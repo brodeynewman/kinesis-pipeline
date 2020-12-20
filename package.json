@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "DEBUG=api* AWS_PROFILE=default sls offline --stage=dev"
+    "start": "DEBUG=api* AWS_PROFILE=default sls offline --stage=prod"
   },
   "keywords": [],
   "author": "",

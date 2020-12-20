@@ -33,3 +33,7 @@ Resources:
       StreamEncryption:
         EncryptionType: KMS
         KeyId: alias/aws/kinesis
+
+Outputs:
+  DefaultStreamArn:
+    Value: !GetAtt KinesisStreamDefault.Arn

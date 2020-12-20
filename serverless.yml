@@ -44,3 +44,12 @@ functions:
           method: ANY
           cors: true
           private: true
+
+  default-stream-consumer:
+    events:
+      - stream:
+          arn: ${cf:${self:service}-resources-${self:provider.stage}.DefaultStreamArn}
+          batchSize: 100
+          maximumRecordAgeInSeconds: 120
+          startingPosition: LATEST
+          enabled: true
