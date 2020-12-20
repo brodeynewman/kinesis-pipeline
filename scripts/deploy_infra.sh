@@ -1,7 +1,7 @@
 #!/bin/bash
 
 STACK_NAME=event-ingestion
-env=${2:-dev}
+env=${1:-dev}
 file="$(pwd)/cloudformation/resources.yml"
 
 echo "--- Running cloudformation file: [${file}] for env: [${env}] ---"
