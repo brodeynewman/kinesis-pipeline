@@ -29,5 +29,5 @@ jobs:
       
       - name: deploy infrastructure
         run: |
-          chmod +x ../../scripts/deploy_infra.sh
-          ../../scripts/deploy_infra.sh dev
+          chmod +x ./scripts/deploy_infra.sh
+          ./scripts/deploy_infra.sh dev
