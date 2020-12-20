@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import transports from '../transports';
 
 const { stream } = transports;

@@ -29,8 +29,6 @@ You can read AWS service limits for Kinesis [here](https://docs.aws.amazon.com/s
 
 # Project
 
-## [Ingestion](./ingestion) service
-
 This service exposes an HTTP interface for ingesting events. In this demo, there is one default transport of type `stream`. This stream adapter using `Kinesis` under the hood. This can easily be swapped out for a different data stream service.
 
 ## Testing locally

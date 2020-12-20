@@ -1,0 +1,35 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Event Ingestion AWS Resources
+
+Parameters:
+  Environment:
+    Type: String
+    Description: The environment you're deploying to.
+  ServiceName:
+    Type: String
+    Default: event-ingestion
+  ThisServiceIamStackName:
+    Type: String
+    Default: ${ServiceName}-iam
+
+Mappings:
+  AccountParameterMap:
+    StreamRetentionPeriodHours:
+      # Dev acct. Sub this for your acct.
+      "678960238302": 24
+
+    StreamShardCountDefault:
+      # Dev acct. Sub this for your acct.
+      "678960238302": 1
+
+Resources:
+  KinesisStreamDefault:
+    Type: "AWS::Kinesis::Stream"
+    Properties:
+      Name: !Sub "${ServiceName}-default"
+      ShardCount: !FindInMap [AccountParameterMap, "StreamShardCountDefault", !Ref "AWS::AccountId"]
+      RetentionPeriodHours: !FindInMap [AccountParameterMap, "StreamRetentionPeriodHours", !Ref "AWS::AccountId"]
+      StreamEncryption:
+        EncryptionType: KMS
+        KeyId: alias/aws/kinesis

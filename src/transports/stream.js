@@ -7,9 +7,11 @@ import { throwHttpBadRequest } from '../utils';
 
 const log = debug('api:transport:stream');
 
-const { AVAILABLE_STREAMS } = constants;
+const { AVAILABLE_STREAMS, STREAM_PREFIX } = constants;
 
 const adapter = new AWS.Kinesis();
+
+const buildStreamName = name => `${STREAM_PREFIX}-${name}`;
 
 const validateTransport = (data) => {
   const { stream } = data;
@@ -28,7 +30,7 @@ const stringBuffer = fp.compose(
 
 const buildParams = ({ stream, payload }) => ({
   PartitionKey: stream,
-  StreamName: stream,
+  StreamName: buildStreamName(stream),
   Data: stringBuffer(payload),
 });
 
