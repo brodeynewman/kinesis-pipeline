@@ -46,10 +46,11 @@ functions:
           private: true
 
   default-stream-consumer:
+    handler: src/consumers/default.compute
     events:
       - stream:
           arn: ${cf:${self:service}-resources-${self:provider.stage}.DefaultStreamArn}
-          batchSize: 100
+          batchSize: 1
           maximumRecordAgeInSeconds: 120
           startingPosition: LATEST
           enabled: true

@@ -43,9 +43,9 @@ const transport = async (data) => {
 
   const body = buildParams(data);
 
-  log('Pushing to stream: [%s]', stream);
+  log('Pushing to stream: [%s] with body: %o', stream, body);
 
-  await putRecord(body);
+  return putRecord(body);
 };
 
 // export adapter interface

@@ -34,6 +34,45 @@ Resources:
         EncryptionType: KMS
         KeyId: alias/aws/kinesis
 
+  EventTable:
+    Type: AWS::DynamoDB::Table
+
+    # Keeps your table if you accidentally delete your cloudformation
+    DeletionPolicy: Retain
+    Properties:
+      TableName: !Sub "${ServiceName}-events"
+
+      # For backups
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      
+      # Pay per request or'on demand' billing model
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: "id" # Needed for your hash key
+          AttributeType: "S"
+        - AttributeName: "foo"
+          AttributeType: "S"
+        - AttributeName: "bar" # name of the attribute in the secondary index
+          AttributeType: "S" # string
+      KeySchema:
+        - AttributeName: "id"
+          KeyType: "HASH"
+
+      # Global Secondary Index definitions... leaving this blank for now
+      # GlobalSecondaryIndexes:
+      #   - IndexName: "my-secondary-index"
+      #     KeySchema:
+      #     - AttributeName: "foo"
+      #       KeyType: "HASH"
+      #     - AttributeName: "bar"
+      #       KeyType: "RANGE"
+      #     Projection:
+      #       ProjectionType: "ALL"
+
 Outputs:
   DefaultStreamArn:
     Value: !GetAtt KinesisStreamDefault.Arn
+
+  EventTableName:
+    Value: !Ref EventTable.TableName

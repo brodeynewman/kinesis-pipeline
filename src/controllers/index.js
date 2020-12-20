@@ -3,7 +3,7 @@ import transports from '../transports';
 const { stream } = transports;
 
 export const push = async (req, res) => {
-  await stream.transport(req.body);
+  const result = await stream.transport(req.body);
 
-  res.json({ success: true });
+  res.json({ result });
 };
