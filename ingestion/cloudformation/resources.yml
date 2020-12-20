@@ -27,5 +27,5 @@ Resources:
       ShardCount: 1 # use moar shareds for moar scale :)
       RetentionPeriodHours: 24
       StreamEncryption:
-          EncryptionType: KMS
-          KeyId: alias/aws/kinesis
+        EncryptionType: KMS
+        KeyId: alias/aws/kinesis
