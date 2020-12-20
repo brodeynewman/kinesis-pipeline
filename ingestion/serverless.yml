@@ -1,0 +1,40 @@
+service: event-ingestion
+frameworkVersion: '2'
+
+plugins:
+  - serverless-webpack
+  - serverless-jest-plugin
+  - serverless-domain-manager
+  - serverless-offline
+
+package:
+  individually: true
+  include:
+    - src/**/*.js
+    - src/**/*.map.js
+  exclude:
+    - src/**/*.test.js
+    - src/**/*.spec.js
+    - node_modules/aws-sdk/**
+    - coverage/**
+
+custom:
+  webpack:
+    includeModules:
+      forceExclude:
+        - aws-sdk
+
+  serverless-offline:
+    httpPort: 3000
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: /
+          method: get
