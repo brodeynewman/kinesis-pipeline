@@ -2,6 +2,10 @@ import _ from 'lodash';
 
 import transports from '../transports';
 
-export const push = (req, res) => {
+const { stream } = transports;
+
+export const push = async (req, res) => {
+  await stream.transport(req.body);
+
   res.json({ success: true });
 };
