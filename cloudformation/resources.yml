@@ -17,7 +17,7 @@ Mappings:
   AccountParameterMap:
     StreamRetentionPeriodHours:
       # Dev acct. Sub this for your acct.
-      "678960238302": 24
+      "678960238302": 36
 
     StreamShardCountDefault:
       # Dev acct. Sub this for your acct.
