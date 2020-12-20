@@ -4,12 +4,39 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "DEBUG=api* AWS_PROFILE=default sls offline --stage=dev"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vendia/serverless-express": "^3.4.0"
+    "@babel/core": "^7.12.10",
+    "@vendia/serverless-express": "^3.4.0",
+    "aws-sdk": "^2.814.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "lodash": "^4.17.20",
+    "serverless-express": "^2.0.11"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-plugin-transform-promise-to-bluebird": "^2.0.0",
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.13.0",
+    "lodash-webpack-plugin": "^0.11.6",
+    "serverless": "^2.16.0",
+    "serverless-offline": "^6.8.0",
+    "serverless-webpack": "^5.3.5",
+    "webpack": "^5.11.0",
+    "webpack-node-externals": "^2.5.2"
   }
 }

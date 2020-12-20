@@ -23,4 +23,38 @@ In this example, we will be using Kinesis as our data streaming service.
 2. Multi-region replication. I don't know too much about it, but can be done with added infrastructure like Lambda. [Read more](https://engineering.opsgenie.com/cross-region-replication-of-kinesis-streams-4a62f3bb269d).
 3. To avoid read throughput bottlenecks, consider [fan out architecture](https://www.linkedin.com/pulse/how-fan-out-amazon-kinesis-streams-alex-casalboni/).
 
-## [Kinesis Service Limits](https://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html)
+## Kinesis Service Limits
+
+You can read AWS service limits for Kinesis [here](https://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html).
+
+# Project
+
+## [Ingestion](./ingestion) service
+
+This service exposes an HTTP interface for ingesting events. In this demo, there is one default transport of type `stream`. This stream adapter using `Kinesis` under the hood. This can easily be swapped out for a different data stream service.
+
+## Testing locally
+
+To start the ingestion service, run:
+
+```bash
+# Install dependencies
+npm i
+
+# Start serverless offline
+npm start
+```
+
+Above command will start serverless offline.
+
+## Pushing to stream
+
+```bash
+curl -v \
+-H "Accept: application/json" \
+-H "x-api-key: d41d8cd98f00b204e9800998ecf8427e" \
+-e localhost \
+-X POST 'http://localhost:3000/dev/push'
+```
+
+The `x-api-key` is required. The value for this (locally) is `d41d8cd98f00b204e9800998ecf8427e`.

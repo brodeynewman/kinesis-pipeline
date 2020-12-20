@@ -2,10 +2,10 @@ service: event-ingestion
 frameworkVersion: '2'
 
 plugins:
-  - serverless-webpack
-  - serverless-jest-plugin
-  - serverless-domain-manager
   - serverless-offline
+  - serverless-express
+  - serverless-webpack
+  # - serverless-domain-manager
 
 package:
   individually: true
@@ -17,24 +17,30 @@ package:
     - src/**/*.spec.js
     - node_modules/aws-sdk/**
     - coverage/**
-
+    
 custom:
   webpack:
-    includeModules:
-      forceExclude:
-        - aws-sdk
-
-  serverless-offline:
-    httpPort: 3000
+    webpackConfig: 'webpack.config.js'   # Name of webpack configuration file
+    includeModules: false   # Node modules configuration for packaging
+    packager: 'npm'   # Packager that will be used to package your external modules
+    excludeFiles: src/**/*.test.js # Provide a glob for files to ignore
 
 provider:
   name: aws
   runtime: nodejs12.x
+  # profile: default
+  stage: ${opt:stage, 'dev'}
+
+  apiKeys:
+    - ${self:service}-${self:provider.stage}-apikey
 
 functions:
-  hello:
-    handler: handler.hello
+  api:
+    handler: src/lambda.handler
+    name: v1-${self:service}-${self:provider.stage}
     events:
       - http:
-          path: /
-          method: get
+          path: /{proxy+}
+          method: ANY
+          cors: true
+          private: true

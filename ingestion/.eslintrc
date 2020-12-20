@@ -1,0 +1,26 @@
+{
+  "env": {
+    "jasmine": true,
+    "jest": true,
+    "node": true
+  },
+  "extends": [
+    "airbnb"
+  ],
+  "parser": "babel-eslint",
+  "rules": {
+    "import/prefer-default-export": 0,
+    "require-jsdoc": [
+      "warn",
+      {
+        "require": {
+          "ClassDeclaration": true,
+          "FunctionDeclaration": true,
+          "FunctionExpression": true,
+          "MethodDefinition": true
+        }
+      }
+    ],
+    "valid-jsdoc": 1
+  }
+}
