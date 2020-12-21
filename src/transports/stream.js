@@ -45,7 +45,13 @@ const transport = (data) => {
 
   log('Pushing to stream: [%s] with body: %o', stream, body);
 
-  return putRecord(body).catch(e => throwHttpBadRequest(e.message));
+  return putRecord(body).catch((e) => {
+    // log this so datadog / sentry or whatever can collect this info
+    log(e.message);
+
+    // throw valid http response code
+    throwHttpBadRequest(e.message);
+  });
 };
 
 // export adapter interface

@@ -36,6 +36,17 @@ provider:
   environment:
     DEBUG: 'api*'
 
+  iamRoleStatements:
+    Effect: Allow
+    Action:
+      - "kinesis:Describe*"
+      - "kinesis:Get*"
+      - "kinesis:List*"
+      - "kinesis:PutRecord*"
+      - "kinesis:SubscribeToShard"
+    Resource:
+      - "*"
+
 functions:
   api:
     handler: src/lambda.handler
