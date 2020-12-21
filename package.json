@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "DEBUG=api* AWS_PROFILE=default sls offline --stage=prod"
+    "start": "DEBUG=api* AWS_PROFILE=default sls offline --stage=prod",
+    "build": "DEBUG=api* sls --stage=prod package"
   },
   "keywords": [],
   "author": "",
@@ -39,7 +40,7 @@
     "serverless": "^2.16.0",
     "serverless-offline": "^6.8.0",
     "serverless-webpack": "^5.3.5",
-    "webpack": "^5.11.0",
-    "webpack-node-externals": "^2.5.2"
+    "webpack": "^4.44.2",
+    "webpack-node-externals": "^1.7.2"
   }
 }
