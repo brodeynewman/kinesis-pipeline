@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import dynamoose from 'dynamoose';
 
 import constants from '../constants';
@@ -10,7 +10,7 @@ const Schema = new dynamoose.Schema({
   id: {
     type: String,
     hashKey: true,
-    default: [uuid.v4()],
+    default: [uuidv4()],
   },
   payload: {
     type: Object,
