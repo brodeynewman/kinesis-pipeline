@@ -11,6 +11,7 @@ In this example, we will be using Kinesis as our data streaming service.
 ### Kinesis vs SQS
 - Kinesis offers multiple consumers for a single stream. SQS only allows one consumer at a time.
 - Kinesis is built for scalable real-time data processing. While SQS *can* solve this problem -- depending on how much throughput your application gets -- the SQS consumer limitations might be a bottleneck.
+- Kinesis allows 'playbacks' of stream data. You can modify the retention period of your stream data to allow point-in-time playbacks.
 
 ### Kinesis vs MSK (Kafka)
 - Kinesis is a fully managed service that allows 'connections' to other AWS services like Lambda, EC2, Kinesis Analytics, EMR, Firehose etc. This *can* be a major convenience when building distributed, multi-region / multi-AZ stream architecture.
