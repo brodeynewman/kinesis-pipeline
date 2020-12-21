@@ -33,6 +33,9 @@ provider:
   apiKeys:
     - ${self:service}-${self:provider.stage}-apikey
 
+  environment:
+    DEBUG: 'api*'
+
 functions:
   api:
     handler: src/lambda.handler
