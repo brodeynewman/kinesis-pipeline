@@ -13,7 +13,7 @@ export const compute = (event) => {
     const parsed = JSON.parse(data);
 
     const insert = {
-      ...parsed,
+      payload: parsed,
       id: uuidv4(),
     };
 
