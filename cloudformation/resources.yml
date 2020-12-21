@@ -51,10 +51,6 @@ Resources:
       AttributeDefinitions:
         - AttributeName: "id" # Needed for your hash key
           AttributeType: "S"
-        - AttributeName: "foo"
-          AttributeType: "S"
-        - AttributeName: "bar" # name of the attribute in the secondary index
-          AttributeType: "S" # string
       KeySchema:
         - AttributeName: "id"
           KeyType: "HASH"
