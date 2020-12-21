@@ -5,4 +5,4 @@ env=${1:-dev}
 
 echo "--- Running sls deploy for env: [${env}] ---"
 
-sls deploy --stage $env --region $region
+npx serverless deploy --stage $env --region $region
