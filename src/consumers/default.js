@@ -1,8 +1,9 @@
 import debug from 'debug';
+import { v4 as uuidv4 } from 'uuid';
 
 import Events from '../db/events';
 
-const log = debug('consumers:default');
+const log = debug('api:consumers:default');
 
 export const compute = (event) => {
   log('Received event...');
@@ -10,9 +11,14 @@ export const compute = (event) => {
   Promise.map(event.Records, async (record) => {
     const payload = Buffer.from(record.kinesis.data, 'base64').toString('ascii');
 
-    log('Decoded payload: %o', payload);
+    const insert = {
+      ...payload,
+      id: uuidv4(),
+    };
 
-    const eventRecord = await Events.create(payload);
+    log('Decoded payload: %o', insert);
+
+    const eventRecord = await Events.create(insert);
 
     log('Created event record: %o', eventRecord);
   });
