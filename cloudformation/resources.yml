@@ -73,6 +73,3 @@ Resources:
 Outputs:
   DefaultStreamArn:
     Value: !GetAtt KinesisStreamDefault.Arn
-
-  EventTableName:
-    Value: !GetAtt EventTable
