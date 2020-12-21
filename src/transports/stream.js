@@ -36,7 +36,7 @@ const buildParams = ({ stream, payload }) => ({
 
 const putRecord = data => adapter.putRecord(data).promise();
 
-const transport = async (data) => {
+const transport = (data) => {
   const { stream } = data;
 
   validateTransport(data);
@@ -45,7 +45,7 @@ const transport = async (data) => {
 
   log('Pushing to stream: [%s] with body: %o', stream, body);
 
-  return putRecord(body);
+  return putRecord(body).catch(e => throwHttpBadRequest(e.message));
 };
 
 // export adapter interface
