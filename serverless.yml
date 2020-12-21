@@ -37,15 +37,20 @@ provider:
     DEBUG: 'api*'
 
   iamRoleStatements:
-    Effect: Allow
-    Action:
-      - "kinesis:Describe*"
-      - "kinesis:Get*"
-      - "kinesis:List*"
-      - "kinesis:PutRecord*"
-      - "kinesis:SubscribeToShard"
-    Resource:
-      - "*"
+    - Effect: Allow
+      Action:
+        - "kinesis:Describe*"
+        - "kinesis:Get*"
+        - "kinesis:List*"
+        - "kinesis:PutRecord*"
+        - "kinesis:SubscribeToShard"
+      Resource:
+        - "*"
+    - Effect: Allow
+      Action:
+        - "dynamodb:*"
+      Resource:
+        - !Sub "arn:*:dynamodb:*:${AWS::AccountId}:table/event-ingestion-events"
 
 functions:
   api:

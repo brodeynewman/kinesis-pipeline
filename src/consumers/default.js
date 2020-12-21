@@ -1,7 +1,7 @@
 import debug from 'debug';
 import { v4 as uuidv4 } from 'uuid';
 
-import Events from '../db/events';
+import Event from '../db/events';
 
 const log = debug('api:consumers:default');
 
@@ -9,16 +9,18 @@ export const compute = (event) => {
   log('Received event...');
 
   Promise.map(event.Records, async (record) => {
-    const payload = Buffer.from(record.kinesis.data, 'base64').toString('ascii');
+    const bufferString = Buffer.from(record.kinesis.data);
+    const parsed = JSON.parse(bufferString);
 
     const insert = {
-      ...payload,
+      ...parsed,
       id: uuidv4(),
     };
 
     log('Decoded payload: %o', insert);
 
-    const eventRecord = await Events.create(insert);
+    const eventModel = new Event(insert);
+    const eventRecord = await eventModel.save();
 
     log('Created event record: %o', eventRecord);
   });
