@@ -1,5 +1,6 @@
 const constants = {
   STREAM_PREFIX: 'event-ingestion',
+  EVENT_TABLE_NAME: 'event-ingestion-events',
   AVAILABLE_STREAMS: {
     default: {
       enabled: true,

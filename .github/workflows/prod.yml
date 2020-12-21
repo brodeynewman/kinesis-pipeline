@@ -32,3 +32,9 @@ jobs:
           chmod +x "${GITHUB_WORKSPACE}"/scripts/deploy_infra.sh
 
           "${GITHUB_WORKSPACE}"/scripts/deploy_infra.sh prod
+
+      - name: deploy sls
+        run: |
+          chmod +x "${GITHUB_WORKSPACE}"/scripts/deploy_sls.sh
+
+          "${GITHUB_WORKSPACE}"/scripts/deploy_sls.sh prod

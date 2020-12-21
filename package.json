@@ -19,7 +19,8 @@
     "dynamoose": "^2.5.0",
     "express": "^4.17.1",
     "lodash": "^4.17.20",
-    "serverless-express": "^2.0.11"
+    "serverless-express": "^2.0.11",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.12.10",
