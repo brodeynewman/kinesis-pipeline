@@ -50,6 +50,12 @@ provider:
         - "dynamodb:*"
       Resource:
         - !Sub "arn:*:dynamodb:*:${AWS::AccountId}:table/event-ingestion-events"
+    - Effect: Allow
+      Action:
+        - "sqs:GetQueueUrl"
+        - "sqs:SendMessage"
+      Resource:
+        - !Sub "arn:*:sqs:*:${AWS::AccountId}:event-ingestion-*"
 
 functions:
   api:
