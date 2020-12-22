@@ -13,7 +13,10 @@ const Schema = new dynamoose.Schema({
   payload: {
     type: Object,
   },
-}, { timestamps: true });
+}, {
+  timestamps: true,
+  saveUnknown: true,
+});
 
 /**
  * Table definition

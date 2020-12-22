@@ -34,6 +34,12 @@ Resources:
         EncryptionType: KMS
         KeyId: alias/aws/kinesis
 
+  MaxRetryQueue:
+    Type: AWS::SQS::Queue
+    Properties: 
+      FifoQueue: True
+      QueueName: !Sub "${ServiceName}-max-retry.fifo"
+
   EventTable:
     Type: AWS::DynamoDB::Table
 
@@ -69,3 +75,6 @@ Resources:
 Outputs:
   DefaultStreamArn:
     Value: !GetAtt KinesisStreamDefault.Arn
+
+  MaxRetryQueueArn:
+    Value: !GetAtt MaxRetryQueue.Arn

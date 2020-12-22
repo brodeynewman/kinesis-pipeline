@@ -70,4 +70,7 @@ functions:
           batchSize: 1
           maximumRecordAgeInSeconds: 120
           startingPosition: LATEST
+          maximumRetryAttempts: 3
           enabled: true
+          destinations:
+            onFailure: ${cf:${self:service}-resources-${self:provider.stage}.MaxRetryQueueArn}
