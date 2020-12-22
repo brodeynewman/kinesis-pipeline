@@ -41,8 +41,8 @@ Resources:
 
   DDBWriteQueue:
     Type: AWS::SQS::Queue
-    FifoQueue: True
-    Properties: 
+    Properties:
+      FifoQueue: True
       QueueName: !Sub "${ServiceName}-ddb-write.fifo"
 
   EventTable:
