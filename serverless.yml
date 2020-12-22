@@ -73,4 +73,11 @@ functions:
           maximumRetryAttempts: 3
           enabled: true
           destinations:
-            onFailure: ${cf:${self:service}-resources-${self:provider.stage}.MaxRetryLambdaQueue}
+            onFailure: ${cf:${self:service}-resources-${self:provider.stage}.MaxRetryLambdaQueueArn}
+
+  sqs-consumer:
+    handler: src/consumers/queue.compute
+    events:
+      - sqs:
+          arn: ${cf:${self:service}-resources-${self:provider.stage}.DDBWriteQueueArn}
+          batchSize: 10

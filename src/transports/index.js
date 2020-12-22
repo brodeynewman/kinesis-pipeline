@@ -1,7 +1,9 @@
 import _ from 'lodash';
 import stream from './stream';
+import queue from './queue';
 
 const interfaces = {
+  queue,
   stream,
 };
 

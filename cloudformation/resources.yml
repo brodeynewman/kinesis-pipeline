@@ -39,6 +39,12 @@ Resources:
     Properties: 
       QueueName: !Sub "${ServiceName}-max-retry"
 
+  DDBWriteQueue:
+    Type: AWS::SQS::Queue
+    FifoQueue: True
+    Properties: 
+      QueueName: !Sub "${ServiceName}-ddb-write.fifo"
+
   EventTable:
     Type: AWS::DynamoDB::Table
 
@@ -60,20 +66,12 @@ Resources:
         - AttributeName: "id"
           KeyType: "HASH"
 
-      # Global Secondary Index definitions... leaving this blank for now
-      # GlobalSecondaryIndexes:
-      #   - IndexName: "my-secondary-index"
-      #     KeySchema:
-      #     - AttributeName: "foo"
-      #       KeyType: "HASH"
-      #     - AttributeName: "bar"
-      #       KeyType: "RANGE"
-      #     Projection:
-      #       ProjectionType: "ALL"
-
 Outputs:
   DefaultStreamArn:
     Value: !GetAtt KinesisStreamDefault.Arn
 
-  MaxRetryLambdaQueue:
+  MaxRetryLambdaQueueArn:
     Value: !GetAtt MaxRetryLambdaQueue.Arn
+
+  DDBWriteQueueArn:
+    Value: !GetAtt DDBWriteQueue.Arn

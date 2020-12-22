@@ -1,27 +1,26 @@
 import debug from 'debug';
-import { v4 as uuidv4 } from 'uuid';
 
-import Event from '../db/events';
+import constants from '../constants';
+import transports from '../transports';
 
-const log = debug('api:consumers:default');
+const { queue } = transports;
+const { DDB_WRITE_QUEUE } = constants;
 
-export const compute = (event) => {
+const log = debug('api:consumers:sqs');
+
+export const compute = async (event) => {
   log('Received event...');
 
-  Promise.map(event.Records, async (record) => {
-    const data = Buffer.from(record.kinesis.data, 'base64').toString();
-    const parsed = JSON.parse(data);
+  await Promise.map(event.Records, async (record) => {
+    log('Stream event: %s', record.kinesis.data);
 
-    const insert = {
-      payload: parsed,
-      id: uuidv4(),
-    };
+    const formatted = Buffer.from(record.kinesis.data, 'base64').toString();
 
-    log('Decoded payload: %o', insert);
+    const processed = await queue.transport({
+      payload: formatted,
+      name: DDB_WRITE_QUEUE,
+    });
 
-    const eventModel = new Event(insert);
-    const eventRecord = await eventModel.save();
-
-    log('Created event record: %o', eventRecord);
+    log('Created stream record: %o', processed);
   });
 };
