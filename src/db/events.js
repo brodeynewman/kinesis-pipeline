@@ -11,7 +11,7 @@ const Schema = new dynamoose.Schema({
     hashKey: true,
   },
   payload: {
-    type: Object,
+    type: String,
   },
 }, {
   timestamps: true,

@@ -9,6 +9,8 @@ export const compute = (event) => {
   log('Received event...');
 
   Promise.map(event.Records, async (record) => {
+    throw new Error('testing');
+
     const data = Buffer.from(record.kinesis.data, 'base64').toString();
     const parsed = JSON.parse(data);
 
