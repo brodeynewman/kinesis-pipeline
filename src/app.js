@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ limit: '6mb', extended: true }));
 /**
  * Route definitions.
  */
-Router.post('/push', push);
+Router.put('/stream', push);
 
 /**
  * Apply Router.

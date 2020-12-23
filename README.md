@@ -6,6 +6,19 @@ There are many tools to solve this problem, including Kafka, AWS SQS, RabbitMQ, 
 
 In this example, we will be using Kinesis as our data streaming service.
 
+### Overview
+
+![Kinesis Data Stream](kinesis.png "Title")
+
+A few things are happening here.
+
+1. This service exposes an HTTP interface for pushing events to Kinesis.
+2. HTTP PUT `/stream` will do a `putRecord` to Kinesis.
+3. A lambda is executed for each event on the stream. This lambda will write to SQS.
+4. If the lambda fails to write to SQS 3 times (due to SQS throttling issues or something...), event message is driven to another SQS queue which acts as a DLQ.
+5. On successful SQS put, a lambda is executed which writes the event payload to Dynamo.
+    * We are doing this because we have `on-demand` scaling model on our Dynamo table. If we knew what our event load would look like, we could provision capacity and skip this step, but Dynamo can take time to scale on-demand which can throttle writes + throw errors.
+
 ## Why Kinesis?
 
 ### Kinesis vs SQS
@@ -46,14 +59,14 @@ npm start
 
 Above command will start serverless offline.
 
-## Pushing to stream
+## Writing to stream
 
 ```bash
 curl -v \
 -H "Accept: application/json" \
 -H "x-api-key: d41d8cd98f00b204e9800998ecf8427e" \
 -e localhost \
--X POST 'http://localhost:3000/dev/push'
+-X PUT 'http://localhost:3000/dev/stream'
 ```
 
 The `x-api-key` is required. The value for this (locally) is `d41d8cd98f00b204e9800998ecf8427e`.
