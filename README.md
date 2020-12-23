@@ -63,10 +63,11 @@ Above command will start serverless offline.
 
 ```bash
 curl -v \
--H "Accept: application/json" \
+-d '{"stream": "default", "payload": { "energy_type": "nuclear" }}' \
+-H 'Content-Type: application/json' \
 -H "x-api-key: d41d8cd98f00b204e9800998ecf8427e" \
 -e localhost \
--X PUT 'http://localhost:3000/dev/stream'
+-X PUT 'http://localhost:3000/prod/stream'
 ```
 
 The `x-api-key` is required. The value for this (locally) is `d41d8cd98f00b204e9800998ecf8427e`.
