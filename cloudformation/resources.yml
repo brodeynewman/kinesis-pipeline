@@ -16,11 +16,11 @@ Parameters:
 Mappings:
   AccountParameterMap:
     StreamRetentionPeriodHours:
-      # Dev acct. Sub this for your acct.
+      # AWS acct #. Sub this for your acct.
       "678960238302": 36
 
     StreamShardCountDefault:
-      # Dev acct. Sub this for your acct.
+      # AWS acct #. Sub this for your acct.
       "678960238302": 1
 
 Resources:
