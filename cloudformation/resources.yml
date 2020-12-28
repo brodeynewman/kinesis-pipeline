@@ -17,11 +17,11 @@ Mappings:
   AccountParameterMap:
     StreamRetentionPeriodHours:
       # AWS acct #. Sub this for your acct.
-      "678960238302": 36
+      "ACCT #": 36
 
     StreamShardCountDefault:
       # AWS acct #. Sub this for your acct.
-      "678960238302": 1
+      "ACCT #": 1
 
 Resources:
   KinesisStreamDefault:
